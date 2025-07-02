@@ -13,7 +13,7 @@ vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
 
 vim.g.have_nerd_font = true
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.keymap.set("n","<space>pv", vim.cmd.Ex)
 
 require("config.lazy")
