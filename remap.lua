@@ -1,4 +1,4 @@
--- --treesitter keymaps
+--treesitterkeymaps
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -12,21 +12,8 @@ vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iag
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 --
 
---GREP search
-vim.keymap.set('n', '<leader>ps',function ()
-  builtin.grep_string({search = vim.fn.input("Grep > ")})
-end)
 
 
-vim.keymap.set("n", "<space><space>x", "<cmd>source %<CR>")
-vim.keymap.set("n", "<space>x", ":.lua<CR>")
-vim.keymap.set("v", "<space>x", ":lua<CR>")
-vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
-
---only when file tree is present
-vim.keymap.set("n","<space>pv", vim.cmd.Ex)
--- to open terminal of nvim
-vim.keymap.set("n", "<space>tm", vim.cmd.term)
 
 --lsp keymaps
  vim.keymap.set("n", "K", vim.lsp.buf.hover, {})

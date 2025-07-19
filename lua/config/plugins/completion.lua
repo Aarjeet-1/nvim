@@ -8,6 +8,10 @@ return {
     dependencies = {
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+
     },
   },
   {
@@ -15,6 +19,7 @@ return {
     config = function()
       local cmp = require("cmp")
       require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip").filetype_extend("javasccript",{"jsdoc"})
 
       cmp.setup({
         snippet = {
