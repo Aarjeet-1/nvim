@@ -1,6 +1,8 @@
 return{
   "folke/tokyonight.nvim",
-  lazy = false,
   priority = 1000,
-  opts = {},
+  opts = {style = "moon"},
+  config = function ()
+
+  end
 }
