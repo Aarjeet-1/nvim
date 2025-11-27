@@ -33,7 +33,8 @@ return {
   {
     "neovim/nvim-lspconfig",
    dependencies = {
-     "j-hui/fidget.nvim"
+     "j-hui/fidget.nvim",
+      "stevearc/conform.nvim",
    },
     config = function()
       require("fidget").setup({})
@@ -90,6 +91,10 @@ return {
       })
     end,
   },
+  {
+"folke/lazydev.nvim",
+opt ={}
+  }
 
 }
 
