@@ -1,6 +1,7 @@
 return {
   {
-    "hrsh7th/cmp-nvim-lsp"
+    "hrsh7th/cmp-nvim-lsp",
+    event = { "BufReadPre", "BufNewFile"}
   },
 
   {
@@ -11,6 +12,7 @@ return {
       "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "onsails/lspkind.nvim"
 
     },
   },
@@ -18,8 +20,9 @@ return {
     "hrsh7th/nvim-cmp",
     config = function()
       local cmp = require("cmp")
+      local lspkind = require("lspkind")
       require("luasnip.loaders.from_vscode").lazy_load()
-      require("luasnip").filetype_extend("javasccript",{"jsdoc"})
+      --require("luasnip").filetype_extend("javasccript",{"jsdoc"})
 
       cmp.setup({
         snippet = {
@@ -38,13 +41,25 @@ return {
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
+        --sources for autocompletion
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" }
-        }, {
+        },
+        {name = "path"},
+        {
           { name = "buffer" },
         }),
+        formatting ={
+            format = lspkind.cmp_format({
+                maxwidth = 50,
+                ellipsis_char = "...",
+
+            }),
+
+        },
       })
     end,
   },
 }
+

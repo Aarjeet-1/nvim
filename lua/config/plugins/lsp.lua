@@ -13,7 +13,18 @@ return {
    config = function()
 
      require("mason-lspconfig").setup({
-ensure_installed = { "lua_ls", "gopls", "tsserver", "pyright" }
+         ensure_installed = { 
+             "lua_ls", 
+             "gopls",
+             "pyright",
+             "ts_ls",
+             "cssls",
+             "html",
+             "tailwindcss"
+
+
+
+}
      })
    end,
  },
@@ -30,7 +41,7 @@ ensure_installed = { "lua_ls", "gopls", "tsserver", "pyright" }
 
    local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
+      vim.lsp.config("lua_ls",{
 	capabilities=capabilities,
 
 	settings = {
@@ -44,9 +55,24 @@ ensure_installed = { "lua_ls", "gopls", "tsserver", "pyright" }
 	  },
 	},
       })
-      lspconfig.gopls.setup({capabilities=capabilities})
-      lspconfig.pyright.setup({capabilities=capabilities})
-      lspconfig.ts_ls.setup({capabilities=capabilities})
+
+      vim.lsp.config("*",{
+      capabilities=capabilities})
+
+--       vim.lsp.config("gopls",{
+--       capabilities=capabilities})
+--       vim.lsp.config("ts_ls",{
+--       capabilities=capabilities})
+--
+--  vim.lsp.config("zls",{
+-- capabilities=capabilities})
+--
+-- vim.lsp.config("rust-analyzer",{
+--       capabilities=capabilities})
+--
+--      vim.lsp.config("pyright", {capabilities=capabilities})
+--      vim.lsp.config("ts_ls",{capabilities=capabilities})
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
       vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
