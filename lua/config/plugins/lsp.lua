@@ -35,65 +35,82 @@ return {
    dependencies = {
      "j-hui/fidget.nvim",
       "stevearc/conform.nvim",
+
+    "hrsh7th/cmp-nvim-lsp",
    },
     config = function()
       require("fidget").setup({})
 
+vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup("UserLspConfig",{}),
+    callback = function (ev)
+        local opts = {buffer = ev.buf, silent = true}
+        
 
-   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      local lspconfig = require("lspconfig")
-      vim.lsp.config("lua_ls",{
-	capabilities=capabilities,
+    end
 
-	settings = {
-	  Lua = {
-	    runtime = {
-	      verson ='LuaJIT',
-	  },
-	    diagnostics = {
-	      globals = { "vim" },
-	    },
-	  },
-	},
-      })
 
-      vim.lsp.config("*",{
-      capabilities=capabilities})
 
---       vim.lsp.config("gopls",{
---       capabilities=capabilities})
---       vim.lsp.config("ts_ls",{
---       capabilities=capabilities})
---
---  vim.lsp.config("zls",{
--- capabilities=capabilities})
---
--- vim.lsp.config("rust-analyzer",{
---       capabilities=capabilities})
---
---      vim.lsp.config("pyright", {capabilities=capabilities})
---      vim.lsp.config("ts_ls",{capabilities=capabilities})
+})
 
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-      vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-      vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-      vim.diagnostic.config({
-	-- update_in_insert = true,
-	float = {
-	  focusable = false,
-	  style = "minimal",
-	  border = "rounded",
-	  source = "always",
-	  header = "",
-	  prefix = "",
-	},
-      })
-    end,
+
+
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local lspconfig = require("lspconfig")
+vim.lsp.config("lua_ls",{
+    capabilities=capabilities,
+
+    settings = {
+        Lua = {
+            runtime = {
+                verson ='LuaJIT',
+            },
+            diagnostics = {
+                globals = { "vim" },
+            },
+        },
+    },
+})
+
+vim.lsp.config("*",{
+    capabilities=capabilities})
+
+    --       vim.lsp.config("gopls",{
+    --       capabilities=capabilities})
+    --       vim.lsp.config("ts_ls",{
+    --       capabilities=capabilities})
+    --
+    --  vim.lsp.config("zls",{
+    -- capabilities=capabilities})
+    --
+    -- vim.lsp.config("rust-analyzer",{
+    --       capabilities=capabilities})
+    --
+    --      vim.lsp.config("pyright", {capabilities=capabilities})
+    --      vim.lsp.config("ts_ls",{capabilities=capabilities})
+
+
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
+    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+    vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+    vim.diagnostic.config({
+        -- update_in_insert = true,
+        float = {
+            focusable = false,
+            style = "minimal",
+            border = "rounded",
+            source = "always",
+            header = "",
+            prefix = "",
+        },
+    })
+end,
   },
   {
-"folke/lazydev.nvim",
-opt ={}
+      "folke/lazydev.nvim",
+      opt ={}
   }
 
 }
