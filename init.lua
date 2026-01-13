@@ -31,14 +31,16 @@ vim.opt.undofile = true
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
+vim.o.splitright = true
+vim.o.splitbelow = true
+
 
 vim.opt.updatetime = 50
 
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 vim.opt.scrolloff = 8
-
---vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = "80"
 
 require("config.lazy")
 require("config.remap")

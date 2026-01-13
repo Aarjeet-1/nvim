@@ -23,8 +23,7 @@ return {
              "tailwindcss"
 
 
-
-}
+}, 
      })
    end,
  },
@@ -40,20 +39,13 @@ return {
    },
     config = function()
       require("fidget").setup({})
-
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup("UserLspConfig",{}),
     callback = function (ev)
         local opts = {buffer = ev.buf, silent = true}
-        
 
     end
-
-
-
 })
-
-
 
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -64,44 +56,53 @@ vim.lsp.config("lua_ls",{
     settings = {
         Lua = {
             runtime = {
-                verson ='LuaJIT',
+                version ='LuaJIT',
             },
             diagnostics = {
                 globals = { "vim" },
+
             },
         },
     },
 })
+--
+-- vim.lsp.config("*",{
+--     capabilities=capabilities})
 
-vim.lsp.config("*",{
+          vim.lsp.config("gopls",{
+          capabilities=capabilities})
+          vim.lsp.config("ts_ls",{
+          capabilities=capabilities})
+
+     vim.lsp.config("zls",{
     capabilities=capabilities})
 
-    --       vim.lsp.config("gopls",{
-    --       capabilities=capabilities})
-    --       vim.lsp.config("ts_ls",{
-    --       capabilities=capabilities})
-    --
-    --  vim.lsp.config("zls",{
-    -- capabilities=capabilities})
-    --
-    -- vim.lsp.config("rust-analyzer",{
-    --       capabilities=capabilities})
-    --
-    --      vim.lsp.config("pyright", {capabilities=capabilities})
-    --      vim.lsp.config("ts_ls",{capabilities=capabilities})
+    vim.lsp.config("rust-analyzer",{
+          capabilities=capabilities})
 
-
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-    vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
+         vim.lsp.config("pyright", {capabilities=capabilities})
+    vim.keymap.set("n", "K", vim.lsp.buf.hover,{})
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
     vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
-    vim.diagnostic.config({
+    vim.lsp.enable("lua_ls")
+ vim.lsp.enable("pyright")
+ vim.lsp.enable("rust_analyzer")
+ vim.lsp.enable("zls")
+
+ --    vim.keymap.set("n", "[d",vim.diagnostic.goto_next,{})
+ --    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev,{})
+ -- vim.keymap.set("n", "ca", vim.lsp.buf.code_action,{})
+ vim.keymap.set("n", "rn", vim.lsp.buf.rename,{})
+ vim.keymap.set("i", "<C-h>", vim.lsp.buf.rename,{})
+ vim.diagnostic.config({
+     virtual_text = true,
         -- update_in_insert = true,
         float = {
             focusable = false,
             style = "minimal",
             border = "rounded",
-            source = "always",
+            source = true,
             header = "",
             prefix = "",
         },
@@ -110,9 +111,8 @@ end,
   },
   {
       "folke/lazydev.nvim",
-      opt ={}
+      opts ={}
   }
 
 }
-
 
